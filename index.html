@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Sayangku ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #FFFBFB; --pastel-pink: #FFD1DC; --deep-pink: #FF8DA1; --text-dark: #4A4A4A; --white: #FFFFFF; --cream: #FFF5F5; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Quicksand', sans-serif; background-color: var(--bg-color); color: var(--text-dark); overflow-x: hidden; min-height: 100vh; }
+        .romantic-text { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--deep-pink); margin-bottom: 1rem; text-align: center; }
+        .sub-text { font-size: 1.1rem; margin-bottom: 1.5rem; text-align: center; color: #6E6E6E; }
+        .page { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; position: fixed; width: 100%; top: 0; left: 0; z-index: 10; background-color: var(--bg-color); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .page.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); }
+        .main-content { max-width: 600px; margin: 0 auto; padding: 80px 20px 40px 20px; display: flex; flex-direction: column; gap: 50px; transition: opacity 1s ease; }
+        .main-content.hidden { opacity: 0; }
+        .section-container { width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .section-title { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--deep-pink); font-weight: 600; }
+        .card { background: var(--white); padding: 30px; border-radius: 24px; box-shadow: 0 10px 30px rgba(255, 141, 161, 0.15); border: 1px solid rgba(255, 209, 220, 0.5); width: 100%; max-width: 450px; display: flex; flex-direction: column; align-items: center; backdrop-filter: blur(5px); }
+        .btn { padding: 12px 30px; border: none; border-radius: 50px; font-family: 'Quicksand', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; outline: none; box-shadow: 0 4px 15px rgba(255, 141, 161, 0.2); }
+        .btn-primary { background-color: var(--deep-pink); color: var(--white); }
+        .btn-primary:hover { background-color: #FF738D; transform: translateY(-2px); }
+        .btn-secondary { background-color: var(--cream); color: var(--deep-pink); border: 1px solid var(--pastel-pink); }
+        .btn-secondary:hover { background-color: var(--pastel-pink); }
+        .btn-surprise { background: linear-gradient(135deg, var(--pastel-pink), var(--deep-pink)); color: var(--white); padding: 15px 40px; font-size: 1.1rem; }
+        .btn-surprise:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 141, 161, 0.4); }
+        .music-container { position: fixed; top: 20px; right: 20px; z-index: 100; }
+        .music-btn { background: rgba(255, 255, 255, 0.85); border: 1px solid var(--pastel-pink); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; font-family: 'Quicksand', sans-serif; backdrop-filter: blur(5px); }
+        .slideshow-container { position: relative; width: 100%; height: 350px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); background-color: #EFEFEF; }
+        .slide { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slide.active { opacity: 1; }
+        .message-text { min-height: 80px; display: flex; align-items: center; justify-content: center; font-size: 2rem; transition: opacity 0.2s; }
+        .surprise-card { margin-top: 20px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .hidden { display: none !important; }
+        .heart-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .floating-heart { position: absolute; bottom: -20px; color: var(--deep-pink); opacity: 0.6; font-size: 12px; animation: floatUp 6s linear infinite; }
+        #confettiCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 99; }
+        @keyframes floatUp { 0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.8; } 100% { transform: translateY(-105vh) translateX(50px) rotate(360deg); opacity: 0; } }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @media (max-width: 480px) { .romantic-text { font-size: 2rem; } .slideshow-container { height: 280px; } .message-text { font-size: 1.6rem; } }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heartBg"></div>
+
+    <div class="music-container">
+        <audio id="bgMusic" src="music/background-love.mp3" loop></audio>
+        <button id="musicBtn" class="music-btn" style="display: none;">🎵 Musik: Mati</button>
+    </div>
+
+    <section id="page1" class="page">
+        <div class="card">
+            <h1 class="romantic-text">Hai Sayang ❤️</h1>
+            <p class="sub-text">Aku punya sesuatu untuk kamu...</p>
+            <button class="btn btn-primary" onclick="startExperience()">Buka Yuk ✨</button>
+        </div>
+    </section>
+
+    <main id="mainContent" class="main-content hidden">
+
+        <section class="section-container">
+            <h2 class="section-title">Kenangan Kita ✨</h2>
+            <div class="slideshow-container">
+                <img src="photos/foto1.jpeg" class="slide active">
+                <img src="photos/foto2.jpeg" class="slide">
+                <img src="photos/foto3.jpeg" class="slide">
+            </div>
+        </section>
+
+        <section class="section-container">
+            <div class="card">
+                <div id="messageBox" class="romantic-text message-text"></div>
+                <button class="btn btn-secondary" onclick="changeMessage()">Pesan Lagi 🔄</button>
+            </div>
+        </section>
+
+        <section class="section-container">
+            <button id="surpriseBtn" class="btn btn-surprise" onclick="showSurprise()">Klik kalau lagi sedih 😘</button>
+            <div id="surpriseMessage" class="card surprise-card hidden">
+                <p class="romantic-text" style="font-size: 1.8rem;">Apa pun yang terjadi hari ini, kamu tetap orang favoritku ❤️</p>
+            </div>
+        </section>
+
+    </main>
+
+    <canvas id="confettiCanvas"></canvas>
+
+    <script>
+        // KAMU BISA EDIT TEKS PESAN DI BAWAH INI Sesuai Keinginanmu:
+        const sweetMessages = [
+            "Love You Sinduy Sayang ❤️",
+            "Kamu Selalu Cantik Setiap Hari 😊",
+            "Kalau capek, istirahat ya sayang 🤗",
+            "Jangan marah marah terus 🥺",
+            "Terima kasih sudah hadir di hidupku ❤️",
+            "I love you more each day 🥰"
+        ];
+
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicBtn');
+        let lastMessageIndex = -1;
+
+        function startExperience() {
+            document.getElementById('page1').classList.add('hidden');
+            document.getElementById('mainContent').classList.remove('hidden');
+            bgMusic.play().then(() => { musicBtn.textContent = "🎵 Musik: Menyala"; }).catch(e => {});
+            musicBtn.style.display = "block";
+            startSlideshow();
+            changeMessage();
+            startFloatingHearts();
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (bgMusic.paused) { bgMusic.play(); musicBtn.textContent = "🎵 Musik: Menyala"; }
+            else { bgMusic.pause(); musicBtn.textContent = "🎵 Musik: Mati"; }
+        });
+
+        function startSlideshow() {
+            const slides = document.querySelectorAll('.slide');
+            let current = 0;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 3000); // Foto berganti setiap 3 detik
+        }
+
+        function changeMessage() {
+            const box = document.getElementById('messageBox');
+            let rand;
+            do { rand = Math.floor(Math.random() * sweetMessages.length); } while (rand === lastMessageIndex);
+            lastMessageIndex = rand;
+            box.style.opacity = 0;
+            setTimeout(() => { box.textContent = sweetMessages[rand]; box.style.opacity = 1; }, 200);
+        }
+
+        function showSurprise() {
+            document.getElementById('surpriseBtn').classList.add('hidden');
+            document.getElementById('surpriseMessage').classList.remove('hidden');
+            initConfetti();
+        }
+
+        function startFloatingHearts() {
+            const bg = document.getElementById('heartBg');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                heart.textContent = ['❤️', '💖', '✨'][Math.floor(Math.random() * 3)];
+                bg.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 700);
+        }
+
+        // Efek Konfeti
+        const canvas = document.getElementById('confettiCanvas'); const ctx = canvas.getContext('2d'); let pieces = []; let confettiInterval;
+        function initConfetti() {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            for (let i = 0; i < 70; i++) {
+                pieces.push({ x: canvas.width / 2, y: canvas.height / 2, size: Math.random() * 8 + 5, color: ['#FFD1DC', '#FF8DA1', '#FFF5F5'][Math.floor(Math.random() * 3)], speedX: Math.random() * 10 - 5, speedY: Math.random() * -15 - 5, gravity: 0.4, opacity: 1 });
+            }
+            if(!confettiInterval) confettiInterval = setInterval(updateConfetti, 1000 / 60);
+        }
+        function updateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pieces.forEach((p, i) => {
+                p.x += p.speedX; p.y += p.speedY; p.speedY += p.gravity; p.opacity -= 0.015;
+                ctx.save(); ctx.globalAlpha = p.opacity; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+                if (p.opacity <= 0) pieces.splice(i, 1);
+            });
+            if (pieces.length === 0) { clearInterval(confettiInterval); confettiInterval = null; }
+        }
+    </script>
+</body>
+</html>
